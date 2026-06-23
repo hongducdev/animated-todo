@@ -1,8 +1,13 @@
 import { Box, Center, Text, VStack, useColorModeValue } from 'native-base'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import ThemeToggle from '../components/theme-toggle'
+import TaskItem from '../components/task-item'
 
 const MainScreen = () => {
+  const [checked, setChecked] = useState(false)
+  const handlePressCheckbox = useCallback(() => {
+    setChecked((prev) => !prev)
+  }, [])
   return (
     <Center
       _dark={{ bg: 'blueGray.900' }}
@@ -15,6 +20,7 @@ const MainScreen = () => {
           <Text color={useColorModeValue('blueGray.900', 'blueGray.50')}>MainScreen</Text>
         </Box>
         <ThemeToggle />
+        <TaskItem isDone={checked} onToggleCheckbox={handlePressCheckbox} />
       </VStack>
     </Center>
   )
